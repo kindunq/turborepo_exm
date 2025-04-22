@@ -1,0 +1,16 @@
+services:
+  app-a:
+    image: demo-app-a
+    build:
+      context: .
+      dockerfile: ./apps/app-a/Dockerfile
+    ports:
+      - 3000:3000
+  app-b:
+    image: demo-app-b
+    build:
+      context: .
+      dockerfile: ./apps/app-b/Dockerfile
+    ports:
+      - 3001:3001
+
