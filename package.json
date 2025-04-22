@@ -1,9 +1,12 @@
 {
-  "name": "my-turborepo",
-  "description": "A barebones Turborepo example for working with Task Graphs.",
-  "private": true,
-  "packageManager": "pnpm@8.15.6",
-  "devDependencies": {
-    "turbo": "^2.5.1-canary.1"
-  }
+	"name": "my-turborepo",
+	"description": "A barebones Turborepo example for working with Task Graphs.",
+	"private": true,
+	"scripts": {
+		"build:ci": "turbo build --filter=\"...[HEAD^1]\" --dry=json | jq .packages"
+	},
+	"packageManager": "pnpm@8.15.6",
+	"devDependencies": {
+		"turbo": "^2.5.1-canary.1"
+	}
 }
