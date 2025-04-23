@@ -1,0 +1,10 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "extends": ["../../biome.json"],
+  "javascript": {
+    "globals": ["document", "window", "navigator", "React", "FormData", "File", "Headers"]
+  },
+  "files": {
+    "ignore": [".storybook/**", "storybook-static/**", "public/**", "__tests__/**", "__mocks__/**"]
+  }
+}

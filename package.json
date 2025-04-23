@@ -1,14 +1,36 @@
 {
-	"name": "my-turborepo-2",
-	"description": "A barebones Turborepo example for working with Task Graphs.",
-	"private": true,
-	"scripts": {
-		"dev": "turbo dev",
-		"build": "turbo build",
-		"build:ci": "turbo build --filter=\"...[HEAD^1]\" --dry=json | jq .packages"
-	},
-	"packageManager": "pnpm@8.15.6",
-	"devDependencies": {
-		"turbo": "^2.5.1-canary.1"
-	}
+  "name": "my-turborepo-22",
+  "description": "A barebones Turborepo example for working with Task Graphs.",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "build:ci": "turbo build --filter=\"...[HEAD^1]\" --dry=json | jq .packages",
+    "build:local": "turbo run build:local",
+    "biome:check": "biome check --write",
+    "check-types": "turbo run check-types",
+    "prepare": "husky",
+    "commitlint": "commitlint"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@commitlint/prompt": "^19.7.1",
+    "commitlint-config-cz": "^0.13.3",
+    "commitlint-plugin-function-rules": "^4.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "turbo": "^2.5.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "pnpm biome:check",
+    "./apps/main/**/*.{ts,tsx}": "pnpm --filter main type-check",
+    "./apps/sub/**/*.{ts,tsx}": "pnpm --filter sub type-check",
+    "./packages/tooling-config/**/*.{ts,tsx}": "pnpm --filter tooling-config type-check"
+  }
 }
