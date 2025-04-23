@@ -1,5 +1,5 @@
 {
-	"name": "my-turborepo",
+	"name": "my-turborepo-2",
 	"description": "A barebones Turborepo example for working with Task Graphs.",
 	"private": true,
 	"scripts": {
