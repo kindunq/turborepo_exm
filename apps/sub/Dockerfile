@@ -22,7 +22,7 @@ WORKDIR /app
 RUN pnpm i -g turbo
 RUN turbo telemetry disable
 COPY . .
-RUN turbo prune app-a --docker
+RUN turbo prune sub --docker
 # -----------------------------------
 # 2. Install 단계 (디펜던시 설치 + 소스 복사)
 # -----------------------------------
@@ -55,7 +55,7 @@ ENV TURBO_API=$TURBO_API
 
 # 빌드 실행
 RUN pnpm turbo telemetry disable
-RUN pnpm turbo build --filter=main... --concurrency=4
+RUN pnpm turbo build --filter=sub --concurrency=4
 
 
 # -----------------------------------
@@ -70,16 +70,16 @@ RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
 # Next.js standalone 모드 기반 복사
-COPY --from=installer --chown=nextjs:nodejs /app/apps/main/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/main/.next/static ./apps/main/.next/static
-COPY --from=installer --chown=nextjs:nodejs /app/apps/main/public ./apps/main/public
+COPY --from=installer --chown=nextjs:nodejs /app/apps/sub/.next/standalone ./
+COPY --from=installer --chown=nextjs:nodejs /app/apps/sub/.next/static ./apps/sub/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/apps/sub/public ./apps/sub/public
 
 
-EXPOSE 3000
+EXPOSE 3001
 
-ENV PORT=3000
+ENV PORT=3001
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
-CMD ["node", "apps/main/server.js"]
+CMD ["node", "apps/sub/server.js"]

@@ -22,7 +22,7 @@ WORKDIR /app
 RUN pnpm i -g turbo
 RUN turbo telemetry disable
 COPY . .
-RUN turbo prune app-b --docker
+RUN turbo prune main --docker
 # -----------------------------------
 # 2. Install 단계 (디펜던시 설치 + 소스 복사)
 # -----------------------------------
@@ -55,7 +55,7 @@ ENV TURBO_API=$TURBO_API
 
 # 빌드 실행
 RUN pnpm turbo telemetry disable
-RUN pnpm turbo build --filter=main... --concurrency=4
+RUN pnpm turbo build --filter=main --concurrency=4
 
 
 # -----------------------------------
@@ -68,6 +68,9 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 USER nextjs
+
+
+
 
 # Next.js standalone 모드 기반 복사
 COPY --from=installer --chown=nextjs:nodejs /app/apps/main/.next/standalone ./

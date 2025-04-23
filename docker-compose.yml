@@ -1,16 +1,21 @@
+name: demo-app
 services:
-  app-a:
-    image: demo-app-a
+  main:
+    image: demo-main
     build:
       context: .
-      dockerfile: ./apps/app-a/Dockerfile
+      dockerfile: ./apps/main/Dockerfile
+      env_file:
+        - .env
     ports:
       - 3000:3000
-  app-b:
-    image: demo-app-b
+  sub:
+    image: demo-sub
     build:
       context: .
-      dockerfile: ./apps/app-b/Dockerfile
+      dockerfile: ./apps/sub/Dockerfile
+      env_file:
+        - .env
     ports:
       - 3001:3001
 
