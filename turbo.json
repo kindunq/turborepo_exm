@@ -1,50 +1,31 @@
 {
-	"$schema": "https://turbo.build/schema.json",
-	"ui": "tui",
-	"tasks": {
-		"//#biome:check": {
-			"cache": false
-		},
-		"build": {
-			"dependsOn": ["^build"],
-			"inputs": [
-				"dictionaries/**",
-				"env/**",
-				"public/**",
-				"src/**",
-				"!../../package.json",
-				"!biome.json",
-				"!../../biome.json",
-				"!../../README.md",
-				"!../../.gitlab-ci.yml"
-			],
-			"outputs": [
-				"dist/**",
-				".next/static/**",
-				".next/standalone/**",
-				"public/**",
-				"dictionaries/**",
-				"!.next/cache/**",
-				"build/**",
-				"!.next/standalone/node_modules/**"
-			]
-		},
-		"test": {
-			"dependsOn": ["^test"],
-			"inputs": ["src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "jest.config.js"]
-		},
-		"lint": {
-			"dependsOn": ["^lint"]
-		},
-		"check-types": {
-			"dependsOn": ["^check-types"]
-		},
-		"start": {
-			"dependsOn": ["^start"]
-		},
-		"dev": {
-			"cache": false,
-			"persistent": true
-		}
-	}
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "//#biome:check": {
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["dictionaries/**", "env/**", "public/**", "src/**", "!biome.json", "!../../biome.json", "!../../README.md", "!../../.gitlab-ci.yml"],
+      "outputs": ["dist/**", ".next/static/**", ".next/standalone/**", "public/**", "dictionaries/**", "!.next/cache/**", "build/**", "!.next/standalone/node_modules/**"]
+    },
+    "test": {
+      "dependsOn": ["^test"],
+      "inputs": ["src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}", "jest.config.js"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "start": {
+      "dependsOn": ["^start"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
 }
