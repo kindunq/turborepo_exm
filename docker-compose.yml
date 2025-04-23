@@ -1,21 +1,23 @@
 name: demo-app
 services:
   main:
+    env_file:
+        - .env
     image: demo-main
     build:
       context: .
       dockerfile: ./apps/main/Dockerfile
-      env_file:
-        - .env
+     
     ports:
       - 3000:3000
   sub:
+    env_file:
+          - .env
     image: demo-sub
     build:
       context: .
       dockerfile: ./apps/sub/Dockerfile
-      env_file:
-        - .env
+      
     ports:
       - 3001:3001
 
